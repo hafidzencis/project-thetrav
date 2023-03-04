@@ -30,14 +30,30 @@
             </li>
         </ul>
         <!-- Mobile Button -->
-        <form class="form-inline d-sm-block d-md-none">
-            <button class="btn btn-login my-2 my-sm-0">Masuk</button>
+        {{-- <div class="form-inline d-sm-block d-md-none">
+            <a href="/login" class="btn btn-login my-2 my-sm-0">Masuk</a>
+        </div> --}}
+        
+        <form class="form-inline d-sm-block d-md-none" action="" method="POST">
+            <button class="btn btn-login my-2 my-sm-0"></button>
         </form>
 
         <!-- Dekstop Button -->
-        <form class="form-inline my-2 my-lg-0 d-none d-md-block">
-            <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4">Masuk</button>
+
+        {{-- <div class="form-inline my-1 my-lg-0 d-none d-md-block">
+            <a href="/login" class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4">Masuk</a>
+        </div> --}}
+        @auth
+        <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{{ route('logout')}}" method="POST">
+            @csrf
+            <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" onclick="alert('Yakin anda mau keluar?')">Keluar</button>
         </form>
+
+        @else
+        <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{{ route('login')}}" method="GET">
+            <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" >Masuk</button>
+        </form>
+        @endauth
         </div>
     </nav>
 </div>
