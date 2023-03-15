@@ -19,34 +19,39 @@
                 <h1>WELCOME BACK!</h1>
                 <h3 class="pb-4">I know you want to little escape from stressful job? </h3>
 
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="email"><h4>Email</h4></label>
-                        <input type="email" class="form-control input-type" id="email"  name="email" aria-describedby="emailHelp" placeholder="Enter Name" />
+                        <input type="email" class="form-control @error('email') is-invalid @enderror input-type" id="email"  name="email" aria-describedby="emailHelp" placeholder="Enter Email" />
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="invalid-feedback">
+                                    {{ $error }}
+                                </div> 
+                            @endforeach
+                        @endif
                     </div>
                     <div class="form-group mt-4">
                         <label for="password"><h4>Password</h4></label>
-                        <input type="password" class="form-control input-type" name="password" id="password" placeholder="Password" />
+                        <input type="password" class="form-control @error('password') is-invalid @enderror input-type" name="password" id="password" placeholder="Password" />
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="invalid-feedback">
+                                    {{ $error }}
+                                </div> 
+                            @endforeach
+                        @endif
                     </div>
+
                     <button type="submit" class="btn btn-sign-up mt-3 ml-5 px-5 py-2"> SIGN IN </button>
                     
                 </form>
 
-                <div class="ml-4 mt-2">
+                <div class="ml-4 mt-2 text-decoration-none">
                     <p>
                     Don't have an account?
-                    <a href="{{ route('register')}}"> <span> Sign Up </span></a>
+                    <a href="{{ route('register')}}" class="text-decoration-none"> <span> Sign Up </span></a>
                     </p>
                 </div>
                 </div>

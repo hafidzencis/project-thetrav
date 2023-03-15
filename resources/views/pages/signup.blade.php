@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-10 justify-content-center ml-auto mr-auto mt-3">
                     <div class="card card-details">
-                        <div class="sign-item">
+                        <div class="signup-item">
                                 <img src="frontend/images/sign.png" alt="" class="img-sign d-none d-lg-block" />
                                 <div class="sign-user ml-5 mt-5">
                                     <h1>HELLO, REGISTRANT !</h1>
@@ -40,20 +40,24 @@
                                             <input type="email" class="form-control input-type" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                                         </div>
                                         <div class="form-group">
+                                            <label for="username"><h4>Username</h4></label>    
+                                            <input type="text" class="form-control input-type" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter username" />  
+                                        </div>
+                                        <div class="form-group">
                                             <label for="password"><h4>Password</h4></label>
                                             <input type="password" class="form-control input-type" name="password" id="password" placeholder="Password" />
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="password_confirmation"><h4>Confirm Password</h4></label>
                                             <input type="password" class="form-control input-type" name="password_confirmation" id="password_confirmation" placeholder="Password" />
-                                        </div>
+                                        </div> --}}
                                         <button type="submit" class="btn btn-sign-up mt-3 ml-5 px-5 py-2">SIGN UP</button>
     
                                     </form>
                                     <div class="ml-5 mt-2">
                                     <p>
                                         Already have account?
-                                        <a href="{{ route('login')}}"><span> Sign In </span></a>
+                                        <a href="{{ route('login')}}" class=" text-decoration-none"><span> Sign In </span></a>
                                     </p>
                                     </div>
                                 </div>

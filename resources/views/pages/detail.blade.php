@@ -29,63 +29,56 @@
             <div class="row">
             <div class="col-lg-8 pl-lg-0">
                 <div class="card card-details">
-                <h1>Labuan Bajo</h1>
-                <p>This island is one of the best islands in the Komodo National Park area, which is increasingly popular.</p>
-                <div class="gallery">
-                    <!-- thumbnail besar-->
-                    <div class="xzoom-container">
-                    <img src="frontend/images/pict-1.jpg" class="xzoom" id="xzoom-default" xoriginal="frontend/images/pict-1.jpg" />
+                <h1>{{ $item->title}}</h1>
+                <p>{{ $item->location }}</p>
+
+                @if ( $item->galleries->count())
+                    <div class="gallery">
+                        <!-- thumbnail besar-->
+                        <div class="xzoom-container">
+                        <img src="{{ Storage::url($item->galleries->first()->image)}}" class="xzoom" id="xzoom-default" xoriginal="{{ Storage::url($item->galleries->first()->image)}}" />
+                        </div>
+                        <!-- thumbnail kecil -->
+                            <div class="xzoom-thumbs">
+                            @foreach ($item->galleries as $gallery)
+                                <a href="{{ Storage::url($gallery->image)}}">
+                                    <img src="{{ Storage::url($gallery->image)}}" class="xzoom-gallery" width="128" xpreview="{{ Storage::url($gallery->image)}}" />
+                                </a>
+                            @endforeach
+                            </div>   
                     </div>
-                    <!-- thumbnail kecil -->
-                    <div class="xzoom-thumbs">
-                    <a href="frontend/images/pict-1.jpg">
-                        <img src="frontend/images/pict-1.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/pict-1.jpg" />
-                    </a>
-                    <a href="frontend/images/pict-2.jpg">
-                        <img src="frontend/images/pict-2.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/pict-2.jpg" />
-                    </a>
-                    <a href="frontend/images/pict-3.jpg">
-                        <img src="frontend/images/pict-3.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/pict-3.jpg" />
-                    </a>
-                    <a href="frontend/images/pict-4.jpg">
-                        <img src="frontend/images/pict-4.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/pict-4.jpg" />
-                    </a>
-                    <a href="frontend/images/pict-5.jpg">
-                        <img src="frontend/images/pict-5.jpg" class="xzoom-gallery" width="128" xpreview="frontend/images/pict-5.jpg" />
-                    </a>
-                    </div>
-                </div>
+                @endif
+              
                 <h2>Tentang Kami</h2>
                 <p>
-                    Padar Labuan Bajo Island is indeed one of the best islands in Indonesia with stunning natural scenery.Talking about the beauty of the island of Flores is endless. This island is one of the best tourist destinations when
-                    sailing on a Komodo tour with its stunning natural scenery. One of the beauties of Flores Komodo is Padar Island Labuan Bajo.
+                    {!! $item->about!!}
                 </p>
-                <p>This island is one of the best islands in the Komodo National Park area, which is increasingly popular.</p>
+                
                 <div class="features row">
                     <div class="col-md-4">
                     <div class="description">
-                        <img src="frontend/images/ic_event.png" alt="" class="features-image" />
+                        <img src="{{ url('frontend/images/ic_event.png')}} " alt="" class="features-image" />
                         <div class="description">
                         <h3>Event</h3>
-                        <p>Komodo Trip</p>
+                        <p>{{ $item->featured_event}}</p>
                         </div>
                     </div>
                     </div>
                     <div class="col-md-4 border-left">
                     <div class="description">
-                        <img src="frontend/images/ic_lang.png" alt="" class="features-image" />
+                        <img src=" {{ url('frontend/images/ic_lang.png')}} " alt="" class="features-image" />
                         <div class="description">
                         <h3>Language</h3>
-                        <p>Bahasa Indonesia</p>
+                        <p>{{ $item->language}}</p>
                         </div>
                     </div>
                     </div>
                     <div class="col-md-4 border-left">
                     <div class="description">
-                        <img src="frontend/images/ic_food.png" alt="" class="features-image" />
+                        <img src="{{ url('frontend/images/ic_food.png')}}  " alt="" class="features-image" />
                         <div class="description">
                         <h3>Food</h3>
-                        <p>Jagung Bose</p>
+                        <p>{{ $item->foods}}</p>
                         </div>
                     </div>
                     </div>
@@ -97,36 +90,48 @@
                 <h2>Members are going</h2>
                 <div class="members my-2">
                     <!-- using image png width and height2x -->
-                    <img src="frontend/images/pict-triper-1.png" class="image-member" />
-                    <img src="frontend/images/pict-triper-2.png" class="image-member" />
-                    <img src="frontend/images/pict-triper-3.png" class="image-member" />
-                    <img src="frontend/images/pict-triper-4.png" class="image-member" />
-                    <img src="frontend/images/pict-triper-5.png" class="image-member" />
-                    <img src="frontend/images/pict-triper-6.png" class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-1.png')}}  " class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-2.png')}} " class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-3.png')}} " class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-4.png')}} " class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-5.png')}} " class="image-member" />
+                    <img src="{{ url('frontend/images/pict-triper-6.png')}} " class="image-member" />
                 </div>
                 <hr />
                 <h2>Trip Informations</h2>
                 <table class="trip-information">
                     <tr>
                     <th width="50%">Date of Departure</th>
-                    <td width="50%" class="text-right">22 Feb 2022</td>
+                    <td width="50%" class="text-right">{{ \Carbon\Carbon::parse($item->departure_date)->diffForHumans()}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Duration</th>
-                    <td width="50%" class="text-right">4D 3N</td>
+                    <td width="50%" class="text-right">{{ $item->duration}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Type of Trip</th>
-                    <td width="50%" class="text-right">Open Public</td>
+                    <td width="50%" class="text-right">{{ $item->type}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Price</th>
-                    <td width="50%" class="text-right">$100,00/Person</td>
+                    <td width="50%" class="text-right">{{ $item->price}}/Person</td>
                     </tr>
                 </table>
                 </div>
                 <div class="join-container">
-                <a href="{{url('checkout')}}" class="btn btn-block btn-join-now mt-3 py-2"> Join Now </a>
+                    @auth
+                        <form action="{{ route('checkout-process', $item->id) }}" method="post">
+                            @csrf
+                            <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                                Join Now
+                            </button>
+                        </form>
+                    @endauth
+                    @guest
+                        <a href="{{route('login')}}" class="btn btn-block btn-join-now mt-3 py-2">Login Now </a>
+                    @endguest
+                        
+                
                 </div>
             </div>
             </div>

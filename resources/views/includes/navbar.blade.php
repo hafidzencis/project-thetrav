@@ -50,9 +50,9 @@
         </form>
 
         @else
-        <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{{ route('login')}}" method="GET">
-            <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" >Masuk</button>
-        </form>
+            <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{{ route('login')}}" method="GET">
+                <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" >Masuk</button>
+            </form>
         @endauth
         </div>
     </nav>

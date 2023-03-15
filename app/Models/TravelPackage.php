@@ -17,4 +17,7 @@ class TravelPackage extends Model
     public function galleries(){
         return $this->hasMany(Gallery::class);
     }
+    public function transactions(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

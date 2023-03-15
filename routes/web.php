@@ -8,9 +8,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\TravelPackageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,16 +61,36 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 //     return view('welcome');
 // });
 
+
+
 Route::get('/',[HomeController::class,'index'])->name('home');
 
-Route::get('/detail',[DetailController::class,'index'])->name('index');
+Route::get('/detail/{slug}',[DetailController::class,'index'])->name('detail');
 
-Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
 
-Route::get('/checkout/success',[CheckoutController::class,'success'])->name('success-checkout');
+Route::get('/checkout/{id}',[CheckoutController::class,'index'])
+    ->name('checkout')
+    ->middleware(['auth']);
+
+Route::post('/checkout/{id}',[CheckoutController::class,'process'])
+    ->name('checkout-process')
+    ->middleware(['auth']);
+
+Route::post('/checkout/create/{detail_id}',[CheckoutController::class,'create'])
+    ->name('checkout-create')
+    ->middleware(['auth']);
+
+Route::get('/checkout/remove/{detail_id}',[CheckoutController::class,'remove'])
+    ->name('checkout-remove')
+    ->middleware(['auth']);
+
+Route::get('/checkout/confirm/{id}',[CheckoutController::class,'success'])
+    ->name('checkout-success')
+    ->middleware(['auth']);
 
 Route::prefix('admin')
     // ->namespace('Admin')
+    ->middleware(['auth','admin'])
     ->group(function (){
         Route::get('/',[DashboardController::class,'index'])
             ->name('dashboard');
@@ -73,6 +98,8 @@ Route::prefix('admin')
         Route::resource('travel-package', TravelPackageController::class);
 
         Route::resource('gallery',GalleryController::class);
+
+        Route::resource('transaction',TransactionController::class);
     });
 
 Route::get('/login', [AuthenticatedSessionController::class, 'index'])
@@ -90,3 +117,16 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
+
+
+// for verify email
+// Route::get('verify-email', EmailVerificationPromptController::class)
+// ->name('verification.notice');
+
+// Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+//             ->middleware(['signed', 'throttle:6,1'])
+//             ->name('verification.verify');
+
+// Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+//             ->middleware('throttle:6,1')
+//             ->name('verification.send');
