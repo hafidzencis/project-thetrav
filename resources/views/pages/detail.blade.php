@@ -29,18 +29,18 @@
             <div class="row">
             <div class="col-lg-8 pl-lg-0">
                 <div class="card card-details">
-                <h1>{{ $item->title}}</h1>
-                <p>{{ $item->location }}</p>
+                <h1>{{ $items->title}}</h1>
+                <p>{{ $items->location }}</p>
 
-                @if ( $item->galleries->count())
+                @if ( $items->galleries->count())
                     <div class="gallery">
                         <!-- thumbnail besar-->
                         <div class="xzoom-container">
-                        <img src="{{ Storage::url($item->galleries->first()->image)}}" class="xzoom" id="xzoom-default" xoriginal="{{ Storage::url($item->galleries->first()->image)}}" />
+                        <img src="{{ Storage::url($items->galleries->first()->image)}}" class="xzoom" id="xzoom-default" xoriginal="{{ Storage::url($items->galleries->first()->image)}}" />
                         </div>
                         <!-- thumbnail kecil -->
                             <div class="xzoom-thumbs">
-                            @foreach ($item->galleries as $gallery)
+                            @foreach ($items->galleries as $gallery)
                                 <a href="{{ Storage::url($gallery->image)}}">
                                     <img src="{{ Storage::url($gallery->image)}}" class="xzoom-gallery" width="128" xpreview="{{ Storage::url($gallery->image)}}" />
                                 </a>
@@ -48,10 +48,10 @@
                             </div>   
                     </div>
                 @endif
-              
+
                 <h2>Tentang Kami</h2>
                 <p>
-                    {!! $item->about!!}
+                    {!! $items->about!!}
                 </p>
                 
                 <div class="features row">
@@ -60,7 +60,7 @@
                         <img src="{{ url('frontend/images/ic_event.png')}} " alt="" class="features-image" />
                         <div class="description">
                         <h3>Event</h3>
-                        <p>{{ $item->featured_event}}</p>
+                        <p>{{ $items->featured_event}}</p>
                         </div>
                     </div>
                     </div>
@@ -69,7 +69,7 @@
                         <img src=" {{ url('frontend/images/ic_lang.png')}} " alt="" class="features-image" />
                         <div class="description">
                         <h3>Language</h3>
-                        <p>{{ $item->language}}</p>
+                        <p>{{ $items->language}}</p>
                         </div>
                     </div>
                     </div>
@@ -78,7 +78,7 @@
                         <img src="{{ url('frontend/images/ic_food.png')}}  " alt="" class="features-image" />
                         <div class="description">
                         <h3>Food</h3>
-                        <p>{{ $item->foods}}</p>
+                        <p>{{ $items->foods}}</p>
                         </div>
                     </div>
                     </div>
@@ -102,25 +102,25 @@
                 <table class="trip-information">
                     <tr>
                     <th width="50%">Date of Departure</th>
-                    <td width="50%" class="text-right">{{ \Carbon\Carbon::parse($item->departure_date)->diffForHumans()}}</td>
+                    <td width="50%" class="text-right">{{ \Carbon\Carbon::parse($items->departure_date)->diffForHumans()}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Duration</th>
-                    <td width="50%" class="text-right">{{ $item->duration}}</td>
+                    <td width="50%" class="text-right">{{ $items->duration}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Type of Trip</th>
-                    <td width="50%" class="text-right">{{ $item->type}}</td>
+                    <td width="50%" class="text-right">{{ $items->type}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Price</th>
-                    <td width="50%" class="text-right">{{ $item->price}}/Person</td>
+                    <td width="50%" class="text-right">{{ $items->price}}/Person</td>
                     </tr>
                 </table>
                 </div>
                 <div class="join-container">
                     @auth
-                        <form action="{{ route('checkout-process', $item->id) }}" method="post">
+                        <form action="{{ route('checkout-process', $items->id) }}" method="post">
                             @csrf
                             <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
                                 Join Now

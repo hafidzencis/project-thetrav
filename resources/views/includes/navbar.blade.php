@@ -1,8 +1,8 @@
 <!-- navbar -->
 <div class="container">
     <nav class="row navbar navbar-expand-lg navbar-light bg-white">
-        <a href="#" class="navbar-brand">
-        <img src="frontend/images/logothetrav.png" alt="" srcset="" />
+        <a href="{{ route('home')}}" class="navbar-brand">
+        <img src=" {{ url('frontend/images/logothetrav.png')}}" alt="" srcset="" />
         </a>
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
@@ -11,22 +11,44 @@
 
         <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav ml-auto mr-3">
+
+            @if (Auth::guest() || Auth::user()->roles != 'ADMIN' )
+
+            @else
             <li class="nav-item mx-md-2">
-            <a href="#" class="nav-link active"> Home </a>
+                <a href=" {{ route('dashboard')}} " class="nav-link "> Kelola Admin </a>
             </li>
+            @endif
+
             <li class="nav-item mx-md-2">
-            <a href="#" class="nav-link"> Paket Travel </a>
+                <a href=" {{ route('home')}} " class="nav-link {{ Route::is('home') ? 'active' : ' '  }}"> Home </a>
             </li>
+
             <li class="nav-item dropdown mx-md-2">
-            <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Services </a>
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Paket Travel </a>
             <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">Link 1</a>
-                <a href="#" class="dropdown-item">Link 2</a>
-                <a href="#" class="dropdown-item">Link 3</a>
-            </div>
+            @foreach ($item_pt as $nav)
+                <a href="{{ route('detail',$nav->slug)}}" class="dropdown-item">{{ $nav->type}}</a>
+            @endforeach
+                </div>  
             </li>
+
+            <li class="nav-item dropdown mx-md-2">
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Place Travel </a>
+            <div class="dropdown-menu">
+            @foreach ($item as $nav)
+                <a href="{{ route('detail',$nav->slug)}}" class="dropdown-item">{{ $nav->title}}</a>
+            @endforeach
+                </div>  
+            </li>
+        
             <li class="nav-item mx-md-2">
-            <a href="#" class="nav-link"> Testimonial </a>
+                @if (Route::is('home'))
+                <a href="#testimonialsContent" class="nav-link"> Testimonial </a>
+                @else
+                <a href="{{ route('home')}}" class="nav-link"> Testimonial </a>
+                @endif
+                
             </li>
         </ul>
         <!-- Mobile Button -->

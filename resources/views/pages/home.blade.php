@@ -65,15 +65,15 @@
                 <div class="container">
                 <div class="section-popular-travel row justify-content-center">
                     <!-- card 1 -->
-                    @foreach ($items as $item)
+                    @foreach ($item as $pcs)
                         
                     <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card-travel text-center d-flex flex-column" style="background-image: 
-                        url('{{ $item->galleries->count() ? Storage::url($item->galleries->first()->image) : ' ' }}')">
-                        <div class="travel-name">{{ $item->title}}</div>
-                        <div class="travel-province">{{ $item->location}}</div>
+                        url('{{ $pcs->galleries->count() ? Storage::url($pcs->galleries->first()->image) : ' ' }}')">
+                        <div class="travel-name">{{ $pcs->title}}</div>
+                        <div class="travel-province">{{ $pcs->location}}</div>
                         <div class="travel-button mt-auto">
-                        <a href=" {{ route('detail', $item->slug)}} " class="btn btn-travel-details px-3"> View Details </a>
+                        <a href=" {{ route('detail', $pcs->slug)}} " class="btn btn-travel-details px-3"> View Details </a>
                         </div>
                     </div>
                     </div>
