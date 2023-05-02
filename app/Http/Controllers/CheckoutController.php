@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Ramsey\Uuid\Uuid;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\TravelPackage;
@@ -35,6 +35,7 @@ class CheckoutController extends Controller
         $transaction = Transaction::create([
             'travel_package_id' => $id,
             'user_id' => Auth::user()->id,
+            'uuid_generate' => UUid::uuid4(),
             'additional_visa' => 0,
             'transaction_total' => $travel_packages->price,
             'transaction_status' => 'IN_CART',
@@ -95,7 +96,7 @@ class CheckoutController extends Controller
         if ($item->is_visa) {
             # code...
 
-            // $transaction->transaction_total -= 1000000;
+            $transaction->transaction_total -= 1000000;
             $transaction->additional_visa -= 1000000;
         }
 

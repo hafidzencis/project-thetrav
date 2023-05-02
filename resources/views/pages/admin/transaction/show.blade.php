@@ -14,7 +14,7 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <tr>
                             <th> ID </th>
-                            <td>{{ $items->id}}</td>
+                            <td>{{ $items->uuid_generate}}</td>
                         </tr>
                         <tr>
                             <th> Paket Travel</th>
@@ -26,11 +26,11 @@
                         </tr>
                         <tr>
                             <th>Additional Visa</th>
-                            <td> {{ $items->additional_visa}}</td>
+                            <td>@currency($items->additional_visa) </td>
                         </tr>
                         <tr>
                             <th> Total Transaksi </th>
-                            <td> {{ $items->transaction_total}}</td>
+                            <td>@currency($items->transaction_total) </td>
                         </tr>
                         <tr>
                             <th> Status Transaksi </th>
@@ -50,7 +50,7 @@
                                     <tr>
                                         @foreach ($items->details as $detail)
                                             <tr>
-                                                <td> {{ $detail->id}}</td>
+                                                <td> {{ $loop->iteration}}</td>
                                                 <td> {{ $detail->username}}</td>
                                                 <td> {{ $detail->nationality}}</td>
                                                 <td> {{ $detail->is_visa ? '30 Days':'N/A'}}</td>

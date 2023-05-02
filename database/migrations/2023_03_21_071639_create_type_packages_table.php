@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->string('username')->nullable()->unique();
+        Schema::create('type_packages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropColumn('username');
-        });
+        Schema::dropIfExists('type_packages');
     }
 };

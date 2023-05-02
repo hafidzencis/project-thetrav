@@ -48,6 +48,6 @@ class User extends Authenticatable
     ];
 
     public function transactions(){
-        return $this->belongsTo(Transaction::class,);
+        return $this->belongsTo(Transaction::class);
     }
 }

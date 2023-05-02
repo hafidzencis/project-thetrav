@@ -123,20 +123,20 @@
                 </tr>
                 <tr>
                     <th width="50%">Additional VISA</th>
-                    <td width="50%" class="text-right"> {{ $item->additional_visa}}</td>
+                    <td width="50%" class="text-right"> @currency($item->additional_visa) </td>
                 </tr>
                 <tr>
                     <th width="50%">Trip Price</th>
-                    <td width="50%" class="text-right"> {{$item->travel_packages->price }} / Person</td>
+                    <td width="50%" class="text-right"> @currency($item->travel_packages->price )  / Person</td>
                 </tr>
                 <tr>
                     <th width="50%">Sub Total</th>
-                    <td width="50%" class="text-right">{{$item->transaction_total}}</td>
+                    <td width="50%" class="text-right">@currency($item->transaction_total)</td>
                 </tr>
                 <tr>
                     <th width="50%">Total (+ Promo)</th>
                     <td width="50%" class="text-right">
-                    <span class="text-blue"> {{$item->transaction_total}}</span>
+                    <span class="text-blue"> @currency($item->transaction_total)</span>
                     </td>
                 </tr>
                 </table>

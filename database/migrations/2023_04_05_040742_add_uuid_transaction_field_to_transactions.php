@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('transactions', function (Blueprint $table) {
             //
-            $table->string('username')->nullable()->unique();
+            $table->string('uuid_generate')->nullable();
         });
     }
 
@@ -26,9 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('transactions', function (Blueprint $table) {
             //
-            $table->dropColumn('username');
+            $table->dropColumn('uuid_generate');
         });
     }
 };

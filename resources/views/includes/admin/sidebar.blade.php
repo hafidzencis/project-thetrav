@@ -19,6 +19,11 @@
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item active">
+        <a class="nav-link" href="{{route('type-package.index')}}">
+            <i class="fas fa-fw fa-hotel"></i>
+            <span>Type Package </span></a>
+    </li>
+    <li class="nav-item active">
         <a class="nav-link" href="{{route('travel-package.index')}}">
             <i class="fas fa-fw fa-hotel"></i>
             <span>Paket Travel</span></a>

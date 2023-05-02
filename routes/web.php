@@ -6,15 +6,19 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TypePackageUserController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\TravelPackageController;
+use App\Http\Controllers\Admin\TypePackageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Models\Transaction;
+use App\Models\TypePackage;
 use GuzzleHttp\Middleware;
 
 /*
@@ -65,6 +69,8 @@ use GuzzleHttp\Middleware;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 
+Route::get('/type-package-user/{id}',[TypePackageUserController::class,'index'])->name('type-package-user');
+
 Route::get('/detail/{slug}',[DetailController::class,'index'])->name('detail');
 
 
@@ -95,11 +101,17 @@ Route::prefix('admin')
         Route::get('/',[DashboardController::class,'index'])
             ->name('dashboard');
 
+        Route::get('/transaction/cetakpdf',[TransactionController::class,'cetakpdf'])
+            ->name('cetakpdftransaksi');
+
+        Route::resource('type-package', TypePackageController::class);    
+
         Route::resource('travel-package', TravelPackageController::class);
 
         Route::resource('gallery',GalleryController::class);
 
         Route::resource('transaction',TransactionController::class);
+
     });
 
 Route::get('/login', [AuthenticatedSessionController::class, 'index'])

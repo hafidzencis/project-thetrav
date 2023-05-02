@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Transaction;
-use App\Models\TransactionDetail;
-use App\Models\User;
+use PDF;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TransactionRequest;
+use Dompdf\Adapter\PDFLib;
+
+// use Dompdf\Adapter\PDFLib;
 
 class TransactionController extends Controller
 {
@@ -117,5 +119,20 @@ class TransactionController extends Controller
 
         return redirect()->route('transaction.index');
         
+    }
+    
+    public function cetakpdf()
+    {
+        $items = Transaction::with(['user','details','travel_packages'])->get();
+    
+        
+        $pdf = PDF::loadView('pages.admin.transaction.cetakpdf',[ 'items' => $items]);
+        // //$pdf = ::loadView
+        
+
+        return $pdf->download('transaksi.pdf');
+        // return view('pages.admin.transaction.cetakpdf',[
+        //     'items' => $items
+        // ]);
     }
 }

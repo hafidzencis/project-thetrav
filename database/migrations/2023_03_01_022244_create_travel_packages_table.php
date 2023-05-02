@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('travel_packages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('type_package_id');
             $table->string('title');
             $table->string('slug');
             $table->string('location');
@@ -24,7 +25,6 @@ return new class extends Migration
             $table->string('foods');
             $table->date('departure_date');
             $table->string('duration');
-            $table->string('type');
             $table->integer('price');
             $table->softDeletes();
             $table->timestamps();

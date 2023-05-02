@@ -25,10 +25,10 @@
             </li>
 
             <li class="nav-item dropdown mx-md-2">
-                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Paket Travel </a>
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Type Paket Travel </a>
             <div class="dropdown-menu">
             @foreach ($item_pt as $nav)
-                <a href="{{ route('detail',$nav->slug)}}" class="dropdown-item">{{ $nav->type}}</a>
+                <a href="{{ route('type-package-user',$nav->id)}}" class="dropdown-item">{{ $nav->name}}</a>
             @endforeach
                 </div>  
             </li>

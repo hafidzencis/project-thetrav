@@ -110,11 +110,11 @@
                     </tr>
                     <tr>
                     <th width="50%">Type of Trip</th>
-                    <td width="50%" class="text-right">{{ $items->type}}</td>
+                    <td width="50%" class="text-right">{{ $items->type_packages->name}}</td>
                     </tr>
                     <tr>
                     <th width="50%">Price</th>
-                    <td width="50%" class="text-right">{{ $items->price}}/Person</td>
+                    <td width="50%" class="text-right">@currency($items->price) <br> / Person</td>
                     </tr>
                 </table>
                 </div>

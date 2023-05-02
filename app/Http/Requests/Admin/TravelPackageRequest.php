@@ -32,7 +32,7 @@ class TravelPackageRequest extends FormRequest
             'foods' => 'required|max:255',
             'departure_date' => 'required|date',
             'duration' => 'required|max:255',
-            'type' => 'required|max:255',
+            'type_package_id' => 'required',
             'price' => 'required|integer'
         ];
     }

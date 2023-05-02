@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\TravelPackage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TravelPackageRequest;
+use App\Http\Requests\Admin\TypePackageRequest;
 use App\Models\TypePackage;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
-class TravelPackageController extends Controller
+class TypePackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +16,9 @@ class TravelPackageController extends Controller
      */
     public function index()
     {
-        $items = TravelPackage::with(['type_packages'])->get();
-    
-        // dd($items);
-        return view('pages.admin.travel-package.index',[
-            'items' => $items
+        $pieces = TypePackage::all();
+        return view('pages.admin.type-package.index',[
+            'pieces' => $pieces
         ]);
     }
 
@@ -33,8 +29,7 @@ class TravelPackageController extends Controller
      */
     public function create()
     {
-        
-        return view('pages.admin.travel-package.create');
+        return view('pages.admin.type-package.create');
     }
 
     /**
@@ -43,15 +38,12 @@ class TravelPackageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TravelPackageRequest $request)
+    public function store(TypePackageRequest $request)
     {
-
-        // dd($request);
         $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
 
-        TravelPackage::create($data);
-        return redirect()->route('travel-package.index');
+        TypePackage::create($data);
+        return redirect()->route('type-package.index');
     }
 
     /**
@@ -62,7 +54,7 @@ class TravelPackageController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -73,13 +65,10 @@ class TravelPackageController extends Controller
      */
     public function edit($id)
     {
+        $pieces = TypePackage::findOrFail($id);
 
-        $item = TravelPackage::findOrFail($id);
-        $type_packages = TypePackage::all();
-
-        return view('pages.admin.travel-package.edit',[
-            'item' => $item,
-            'type_packages' => $type_packages
+        return view('pages.admin.type-package.edit',[
+            'pieces' => $pieces
         ]);
     }
 
@@ -90,16 +79,16 @@ class TravelPackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id,TravelPackageRequest $request)
+    public function update(TypePackageRequest $request, $id)
     {
+        //
         $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
 
-        $item = TravelPackage::findOrFail($id);
+        $item = TypePackage::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('travel-package.index');
+        return redirect()->route('type-package.index');
     }
 
     /**
@@ -110,10 +99,10 @@ class TravelPackageController extends Controller
      */
     public function destroy($id)
     {
-        $item = TravelPackage::findOrFail($id);
+        $item = TypePackage::findOrFail($id);
 
-        TravelPackage::destroy($item->id);
-
-        return redirect()->route('travel-package.index');
+        TypePackage::destroy($item->id);
+        
+        return redirect()->route('type-package.index');
     }
 }

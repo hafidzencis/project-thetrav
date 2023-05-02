@@ -5,10 +5,10 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Paket Travel</h1>
-            <a href="{{ route('travel-package.create')}}"  class="btn btn-primary">
+            <h1 class="h3 mb-0 text-gray-800">Type Package</h1>
+            <a href="{{ route('type-package.create')}}"  class="btn btn-primary">
 
-                <i class="fas fa-plus fa-sm text-white-S0"></i> Tambah Paket Travel
+                <i class="fas fa-plus fa-sm text-white-S0"></i> Tambah Tipe Travel
             </a>
         </div>
 
@@ -19,28 +19,20 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Location</th>
-                                <th>Duration</th>
-                                <th>Departure Date</th>
-                                <th>Type</th>
+                                <th>Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                                @forelse ($items as $item)
+                                @forelse ($pieces as $item)
                                 <tr>
                                     <td>{{ $item->id}}</td>
-                                    <td>{{ $item->title}}</td>
-                                    <td>{{ $item->location}}</td>
-                                    <td>{{ $item->duration}}</td>
-                                    <td>{{ $item->departure_date}}</td>
-                                    <td>{{ $item->type_packages->name}}</td>
+                                    <td>{{ $item->name}}</td>
                                     <td>
-                                        <a href="{{ route('travel-package.edit',$item->id) }} " class="btn btn-info">
+                                        <a href="{{ route('type-package.edit',$item->id) }} " class="btn btn-info">
                                             <i class="fa fa-pencil-alt"></i>
                                         </a>
-                                        <form action="{{ route('travel-package.destroy',$item->id) }}" method="post" class="d-inline">
+                                        <form action="{{ route('type-package.destroy',$item->id) }}" method="post" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" onclick="confirm('are you sure?')">

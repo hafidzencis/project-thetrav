@@ -59,8 +59,12 @@
                         <input type="text" class="form-control" name="duration" id="duration" value="{{ $item->duration }}"  placeholder="duration">
                     </div>
                     <div class="form-group">
-                        <label for="type"> Type </label>
-                        <input type="text" class="form-control" name="type" id="type" value="{{ $item->type}}"  placeholder="type">
+                        <label for="type_package_id">Paket Travel</label>
+                        <select name="type_package_id" id="type_package_id" class="form-control">
+                        @foreach ( $type_packages as $type_package)
+                            <option value="{{ $type_package->id }}"> {{$type_package->name}}</option>
+                        @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="price"> Price </label>
